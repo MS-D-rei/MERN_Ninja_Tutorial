@@ -1,11 +1,15 @@
 require('dotenv').config();
 const express = require('express')
+const workoutRoutes = require("./router/workouts");
 
 /* create express app */
 const app = express();
 
 const hostname = 'localhost';
 const port = process.env.PORT;
+
+/* use middleware to parse json */
+app.use(express.json());
 
 app.listen(port, hostname, () => {
   console.log(`Listening port: ${port}`);
@@ -19,3 +23,6 @@ app.use((req, res, next) => {
 app.get("/", (req, res) => {
   res.json({ message: 'Hello, world json'});
 })
+
+/* workouts routes */
+app.use("/api/workouts", workoutRoutes);
