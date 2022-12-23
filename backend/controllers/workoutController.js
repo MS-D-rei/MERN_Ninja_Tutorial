@@ -42,8 +42,39 @@ const workout_create_post = async (req, res) => {
   }
 };
 
+// delete the workout
+const workout_delete = async (req, res) => {
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    res.status(404).json({ error: "The workout not found" });
+  }
+  const workout = await Workout.findByIdAndDelete(req.params.id);
+  if (!workout) {
+    return res.status(400).json({ error: "The workout not found" });
+  }
+  res.status(200).json(workout);
+};
+
+// update the workout
+const workout_update_patch = async (req, res) => {
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    res.status(404).json({ error: "The workout not found" });
+  }
+  const workout = await Workout.findOneAndUpdate(
+    { _id: req.params.id },
+    {
+      ...req.body,
+    }
+  );
+  if (!workout) {
+    return res.status(400).json({ error: "The workout not found" });
+  }
+  res.status(200).json(workout);
+};
+
 module.exports = {
   workout_index,
   workout_detail,
   workout_create_post,
+  workout_delete,
+  workout_update_patch,
 };
