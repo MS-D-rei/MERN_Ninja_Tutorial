@@ -36,10 +36,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get("/", (req, res) => {
-  res.json({ message: "Hello, world json" });
-});
-
 /* workouts routes */
 app.use("/api/workouts", workoutRoutes);
 
