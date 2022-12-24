@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { IWorkout } from '@/types/workout-type';
+import WorkoutList from '@/components/workout/WorkoutList';
 
 export default function Home() {
   const [workouts, setWorkouts] = useState<IWorkout[]>();
@@ -19,8 +20,7 @@ export default function Home() {
     <div className="home">
       <div className="workout">
         <h2>Home</h2>
-        {workouts &&
-          workouts.map((workout) => <p key={workout._id}>{workout.title}</p>)}
+        {workouts && <WorkoutList workouts={workouts} />}
       </div>
     </div>
   );
