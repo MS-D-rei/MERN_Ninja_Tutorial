@@ -1,3 +1,5 @@
+import styles from '@/styles/WorkoutItem.module.css'
+
 interface WorkoutItemProps {
   title: string;
   reps: number;
@@ -12,7 +14,7 @@ export default function WorkoutItem({
   createdAt,
 }: WorkoutItemProps) {
   return (
-    <li className="workout-detail">
+    <li className={styles.workoutDetails}>
       <h4>{title}</h4>
       <p>Load(kg): {load}</p>
       <p>Reps: {reps}</p>
