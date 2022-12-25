@@ -1,20 +1,20 @@
-.workoutDetails{
+.workoutDetails {
   list-style-type: none;
   background: #fff;
   border-radius: 4px;
-  margin: 20px auto;
-  padding: 20px;
+  margin: 2rem auto;
+  padding: 1rem;
   position: relative;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
 }
 .workoutDetails h4 {
-  margin: 0 0 10px 0;
-  font-size: 1.2em;
+  margin: 0 0 0.7rem 0;
+  font-size: 1.2rem;
   color: var(--primary);
 }
 .workoutDetails p {
   margin: 0;
-  font-size: 0.9em;
+  font-size: 1rem;
   color: #555;
 }
 .workoutDetails span {

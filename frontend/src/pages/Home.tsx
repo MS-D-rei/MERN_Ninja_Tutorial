@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { IWorkout } from '@/types/workout-type';
 import WorkoutList from '@/components/workout/WorkoutList';
 import styles from '@/styles/Home.module.css'
+import WorkoutForm from '@/components/workout/WorkoutForm';
 
 export default function Home() {
   const [workouts, setWorkouts] = useState<IWorkout[]>();
@@ -20,9 +21,10 @@ export default function Home() {
   return (
     <div className={styles.home}>
       <div className="workout">
-        <h2>Home</h2>
+        <h2>All Workouts</h2>
         {workouts && <WorkoutList workouts={workouts} />}
       </div>
+      <WorkoutForm />
     </div>
   );
 }
