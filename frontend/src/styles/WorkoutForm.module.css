@@ -1,0 +1,49 @@
+.formControl {
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.formControl label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.formControl input {
+  display: block;
+  width: 100%;
+  font: inherit;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 0.25rem;
+}
+
+.formActions {
+  margin-top: 1rem;
+}
+
+.formActions button {
+  font: inherit;
+  cursor: pointer;
+  background: #1aac83;
+  color: #fff;
+  border: 1px solid #1aac83;
+  border-radius: 4px;
+  padding: 0.5rem 1.5rem;
+  margin-top: 1rem;
+}
+
+.formActions button:hover,
+.formActions button:active {
+  background-color: deepskyblue;
+  border-color: deepskyblue;
+}
+
+.error {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: #ffefef;
+  border: 1px solid var(--error);
+  color: var(--error);
+  border-radius: 4px;
+}
