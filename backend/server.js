@@ -11,7 +11,7 @@ const hostname = "localhost";
 const port = process.env.PORT;
 
 /* CORS setting */
-const accessControlAllowOrigins = ["http://localhost:5173"];
+const accessControlAllowOrigins = ["http://localhost:5173", "http://127.0.0.1:5173"];
 const accessControlAllowMethods = [
   "GET",
   "HEAD",
