@@ -7,23 +7,31 @@
   position: relative;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
 }
+
 .workoutDetails h4 {
   margin: 0 0 0.7rem 0;
   font-size: 1.2rem;
   color: var(--primary);
 }
+
 .workoutDetails p {
   margin: 0;
   font-size: 1rem;
   color: #555;
 }
+
 .workoutDetails span {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 1.5rem;
+  right: 2rem;
   cursor: pointer;
-  background: #f1f1f1;
+  background-color: lightpink;
   padding: 6px;
-  border-radius: 50%;
-  color: #333;
+  border-radius: 5px;
+  color: #fff;
+}
+
+.workoutDetails span:hover,
+.workoutDetails span:active {
+  background-color: deeppink;
 }

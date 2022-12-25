@@ -12,6 +12,7 @@ export default function WorkoutList({ workouts }: WorkoutListProps) {
       {workouts.map((workout) => (
         <WorkoutItem
           key={workout._id}
+          id={workout._id}
           title={workout.title}
           reps={workout.reps}
           load={workout.load}
