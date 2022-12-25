@@ -1,22 +1,17 @@
 import { useEffect, useState } from 'react';
-import { IWorkout } from '@/types/workout-type';
 import WorkoutList from '@/components/workout/WorkoutList';
-import styles from '@/styles/Home.module.css'
+import styles from '@/styles/Home.module.css';
 import WorkoutForm from '@/components/workout/WorkoutForm';
+import { useAppDispatch, useAppSelector } from '@/hooks/workoutsHook';
+import { getAllWorkouts } from '@/store/workoutsSlice';
 
 export default function Home() {
-  const [workouts, setWorkouts] = useState<IWorkout[]>();
+  const dispatch = useAppDispatch();
+  const workouts = useAppSelector((state) => state.workouts.workouts);
 
   useEffect(() => {
-    const fetchWorkouts = async () => {
-      const response = await fetch('http://localhost:4000/api/workouts');
-      const data = await response.json();
-      if (response.ok) {
-        setWorkouts(data);
-      }
-    };
-    fetchWorkouts();
-  }, []);
+    dispatch(getAllWorkouts());
+  }, [dispatch]);
 
   return (
     <div className={styles.home}>

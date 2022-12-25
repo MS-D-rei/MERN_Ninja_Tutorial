@@ -1,4 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
+import { useAppDispatch } from '@/hooks/workoutsHook';
+import { getAllWorkouts } from '@/store/workoutsSlice';
 import styles from '@/styles/WorkoutForm.module.css';
 
 export default function WorkoutForm() {
@@ -7,7 +9,9 @@ export default function WorkoutForm() {
   const [reps, setReps] = useState('');
   const [error, setError] = useState(null);
 
-  console.log('WorkForm is rendered');
+  const dispatch = useAppDispatch();
+
+  // console.log('WorkForm is rendered');
 
   const titleInputChangeHander = (event: ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
@@ -47,6 +51,7 @@ export default function WorkoutForm() {
       setTitle('');
       setLoad('');
       setReps('');
+      dispatch(getAllWorkouts());
     }
     console.log(data);
   };
