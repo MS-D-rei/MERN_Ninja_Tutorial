@@ -22,6 +22,24 @@
 
 .workoutDetails span {
   position: absolute;
+  width: 2rem;
+  height: 2rem;
+  top: 1.5rem;
+  right: 2rem;
+  cursor: pointer;
+  /* background-color: lightpink; */
+  padding: 6px;
+  border-radius: 5px;
+  color: hotpink;
+}
+
+.workoutDetails span:hover,
+.workoutDetails span:active {
+  color: deeppink;
+}
+
+/* .workoutDetails span {
+  position: absolute;
   top: 1.5rem;
   right: 2rem;
   cursor: pointer;
@@ -34,4 +52,4 @@
 .workoutDetails span:hover,
 .workoutDetails span:active {
   background-color: deeppink;
-}
+} */

@@ -2,7 +2,8 @@ import { useAppDispatch } from '@/hooks/workoutsHook';
 import { getAllWorkouts } from '@/store/workoutsSlice';
 import styles from '@/styles/components/workout/WorkoutItem.module.css';
 import { IWorkout } from '@/types/workout-type';
-import { HiOutlineTrash } from 'react-icons/hi'
+import { HiOutlineTrash } from 'react-icons/hi';
+import { IconContext } from 'react-icons';
 
 interface WorkoutItemProps {
   id: string;
@@ -20,7 +21,7 @@ export default function WorkoutItem({
   createdAt,
 }: WorkoutItemProps) {
   const dispatch = useAppDispatch();
-  
+
   const deleteWorkoutHandler = async (id: string) => {
     const response = await fetch(`http://localhost:4000/api/workouts/${id}`, {
       method: 'DELETE',
@@ -40,8 +41,11 @@ export default function WorkoutItem({
       <p>Load(kg): {load}</p>
       <p>Reps: {reps}</p>
       <p>{createdAt}</p>
-      {/* <span onClick={() => deleteWorkoutHandler(id)}>Delete</span> */}
-      <span onClick={() => deleteWorkoutHandler(id)}><HiOutlineTrash /></span>
+      <span onClick={() => deleteWorkoutHandler(id)}>
+        <IconContext.Provider value={{ size: '1.5rem' }}>
+          <HiOutlineTrash />
+        </IconContext.Provider>
+      </span>
     </li>
   );
 }
