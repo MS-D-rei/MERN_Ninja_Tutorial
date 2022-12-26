@@ -30,6 +30,25 @@ const workout_detail = async (req, res) => {
 // create a new workout
 const workout_create_post = async (req, res) => {
   const { title, reps, load } = req.body;
+
+  let errorMessages = [];
+
+  if (title.trim().length === 0) {
+    errorMessages.push("Exersize Title is empty");
+  }
+
+  if (load.trim().length === 0) {
+    errorMessages.push("Load is empty");
+  }
+
+  if (reps.trim().length === 0) {
+    errorMessages.push("Reps is empty");
+  }
+
+  if (errorMessages.length > 0) {
+    return res.status(400).json({ error: errorMessages });
+  }
+
   try {
     const workout = await Workout.create({ title, reps, load });
     res.status(200).json(workout);
