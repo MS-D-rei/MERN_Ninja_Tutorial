@@ -2,6 +2,7 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 import { useAppDispatch } from '@/hooks/workoutsHook';
 import { getAllWorkouts } from '@/store/workoutsSlice';
 import styles from '@/styles/WorkoutForm.module.css';
+import WorkoutListError from './WorkoutListError';
 
 export default function WorkoutForm() {
   const [title, setTitle] = useState('');
@@ -13,6 +14,7 @@ export default function WorkoutForm() {
 
   // console.log('WorkForm is rendered');
 
+  // set each state
   const titleInputChangeHander = (event: ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
   };
@@ -25,6 +27,7 @@ export default function WorkoutForm() {
     setReps(event.target.value);
   };
 
+  // submit handle
   const submitHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const newWorkout = {
@@ -89,7 +92,7 @@ export default function WorkoutForm() {
       <div className={styles.formActions}>
         <button type="submit">Add Workout</button>
       </div>
-      {error && <div className={styles.error}>{error}</div>}
+      {error && <WorkoutListError error={error} />}
     </form>
   );
 }

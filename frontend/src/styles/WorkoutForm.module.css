@@ -38,12 +38,3 @@
   background-color: deepskyblue;
   border-color: deepskyblue;
 }
-
-.error {
-  margin-top: 1.5rem;
-  padding: 1rem;
-  background: #ffefef;
-  border: 1px solid var(--error);
-  color: var(--error);
-  border-radius: 4px;
-}
