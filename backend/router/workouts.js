@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const Workout = require("../models/workoutModel");
 const { workout_index, workout_detail, workout_create_post, workout_delete, workout_update_patch } = require("../controllers/workoutController");
 
 /* GET: get all workouts */

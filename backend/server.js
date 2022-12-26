@@ -1,6 +1,9 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
+/* user routes */
+const userRoutes = require("./router/user");
+/* workout routes */
 const workoutRoutes = require("./router/workouts");
 const mongoose = require("mongoose");
 
@@ -11,7 +14,10 @@ const hostname = "localhost";
 const port = process.env.PORT;
 
 /* CORS setting */
-const accessControlAllowOrigins = ["http://localhost:5173", "http://127.0.0.1:5173"];
+const accessControlAllowOrigins = [
+  "http://localhost:5173",
+  "http://127.0.0.1:5173",
+];
 const accessControlAllowMethods = [
   "GET",
   "HEAD",
@@ -38,6 +44,8 @@ app.use((req, res, next) => {
 
 /* workouts routes */
 app.use("/api/workouts", workoutRoutes);
+/* users routes */
+app.use("/api/user", userRoutes);
 
 /* connect DB */
 mongoose.set("strictQuery", false);
