@@ -1,8 +1,8 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useAppDispatch } from '@/hooks/workoutsHook';
 import { getAllWorkouts } from '@/store/workoutsSlice';
-import styles from '@/styles/WorkoutForm.module.css';
-import WorkoutListError from './WorkoutListError';
+import styles from '@/styles/components/workout/WorkoutForm.module.css';
+import WorkoutListError from '@/components/workout/WorkoutListError';
 
 export default function WorkoutForm() {
   const [title, setTitle] = useState('');

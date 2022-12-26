@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import styles from '@/styles/MainNavigation.module.css'
+import styles from '@/styles/components/layout/MainNavigation.module.css'
 
 export default function MainNavigation() {
   return (

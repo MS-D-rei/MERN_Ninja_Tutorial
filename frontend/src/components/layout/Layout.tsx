@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import MainNavigation from '@/components/layout/MainNavigation';
-import styles from '@/styles/Layout.module.css'
+import styles from '@/styles/components/layout/Layout.module.css'
 
 export default function Layout() {
   return (

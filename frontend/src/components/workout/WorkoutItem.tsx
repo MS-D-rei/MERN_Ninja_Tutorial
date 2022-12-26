@@ -1,7 +1,8 @@
 import { useAppDispatch } from '@/hooks/workoutsHook';
 import { getAllWorkouts } from '@/store/workoutsSlice';
-import styles from '@/styles/WorkoutItem.module.css';
+import styles from '@/styles/components/workout/WorkoutItem.module.css';
 import { IWorkout } from '@/types/workout-type';
+import { HiOutlineTrash } from 'react-icons/hi'
 
 interface WorkoutItemProps {
   id: string;
@@ -39,7 +40,8 @@ export default function WorkoutItem({
       <p>Load(kg): {load}</p>
       <p>Reps: {reps}</p>
       <p>{createdAt}</p>
-      <span onClick={() => deleteWorkoutHandler(id)}>Delete</span>
+      {/* <span onClick={() => deleteWorkoutHandler(id)}>Delete</span> */}
+      <span onClick={() => deleteWorkoutHandler(id)}><HiOutlineTrash /></span>
     </li>
   );
 }

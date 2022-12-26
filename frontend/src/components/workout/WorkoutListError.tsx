@@ -1,4 +1,4 @@
-import styles from '@/styles/WorkoutListError.module.css'
+import styles from '@/styles/components/workout/WorkoutListError.module.css'
 
 interface WorkoutListErrorProps {
   error: string[]

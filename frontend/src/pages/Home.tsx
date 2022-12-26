@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import WorkoutList from '@/components/workout/WorkoutList';
-import styles from '@/styles/Home.module.css';
+import styles from '@/styles/pages/Home.module.css';
 import WorkoutForm from '@/components/workout/WorkoutForm';
 import { useAppDispatch, useAppSelector } from '@/hooks/workoutsHook';
 import { getAllWorkouts } from '@/store/workoutsSlice';

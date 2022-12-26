@@ -1,6 +1,6 @@
 import { IWorkout } from '@/types/workout-type';
 import WorkoutItem from './WorkoutItem';
-import styles from '@/styles/WorkoutList.module.css'
+import styles from '@/styles/components/workout/WorkoutList.module.css'
 
 interface WorkoutListProps {
   workouts: IWorkout[];
