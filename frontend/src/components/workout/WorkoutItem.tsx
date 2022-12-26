@@ -4,6 +4,7 @@ import styles from '@/styles/components/workout/WorkoutItem.module.css';
 import { IWorkout } from '@/types/workout-type';
 import { HiOutlineTrash } from 'react-icons/hi';
 import { IconContext } from 'react-icons';
+import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 
 interface WorkoutItemProps {
   id: string;
@@ -40,7 +41,7 @@ export default function WorkoutItem({
       <h4>{title}</h4>
       <p>Load(kg): {load}</p>
       <p>Reps: {reps}</p>
-      <p>{createdAt}</p>
+      <p>{formatDistanceToNow(new Date(createdAt), { addSuffix: true })}</p>
       <span onClick={() => deleteWorkoutHandler(id)}>
         <IconContext.Provider value={{ size: '1.5rem' }}>
           <HiOutlineTrash />
