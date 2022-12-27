@@ -29,7 +29,7 @@ userSchema.statics.signup = async function (name, email, password) {
     throw new Error("All fields must be filled");
   }
 
-  let errorMessages = []
+  let errorMessages = [];
 
   if (!validator.isEmail(email)) {
     errorMessages.push("Email is not valid");
@@ -59,6 +59,26 @@ userSchema.statics.signup = async function (name, email, password) {
   const salt = await bcrypt.genSalt(saltRound);
   const hash = await bcrypt.hash(password, salt);
   const user = await this.create({ name, email, password: hash });
+
+  return user;
+};
+
+userSchema.statics.login = async function (email, password) {
+  if (!email || !password) {
+    throw new Error("All field must be filled");
+  }
+
+  const user = await this.findOne({ email });
+
+  if (!user) {
+    throw new Error("The email has not been registered");
+  }
+
+  const isMatchedPassword = await bcrypt.compare(password, user.password);
+
+  if (!isMatchedPassword) {
+    throw new Error("Incorrect password");
+  }
 
   return user;
 };
