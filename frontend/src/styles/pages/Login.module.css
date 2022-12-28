@@ -61,3 +61,12 @@
   background-color: deepskyblue;
   border-color: deepskyblue;
 }
+
+.errorMessage {
+  margin-top: 1rem;
+  padding: 0.5rem;
+  background-color: #ffefef;
+  color: #e7195a;
+  border: 1px solid #e7195a;
+  border-radius: 4px;
+}
