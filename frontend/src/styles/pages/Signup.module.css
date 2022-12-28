@@ -1,0 +1,63 @@
+.signupSection {
+  width: 90%;
+  margin: 4rem auto;
+  max-width: 40rem;
+  padding: 1rem;
+  background-color: white;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.signupForm {
+  display: block;
+  justify-content: center;
+  padding: 0 10%;
+}
+
+.signupSection h3 {
+  text-align: center;
+}
+
+.formControl {
+  margin-bottom: 1.5rem;
+}
+
+.formControl label {
+  display: block;
+  color: #555;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.formControl input {
+  width: 100%;
+  font: inherit;
+  text-align: left;
+  background-color: #d4fcf0;
+  color: #38015c;
+  border: 1px solid white;
+  border-radius: 4px;
+}
+
+.formActions {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.formActions button {
+  font: inherit;
+  cursor: pointer;
+  background-color: #1aac83;
+  color: white;
+  border: 1px solid #1aac83;
+  border-radius: 4px;
+  padding: 0.5rem 1.5rem;
+  margin: 1rem;
+}
+
+.formActions button:hover,
+.formActions button:active {
+  background-color: deepskyblue;
+  border-color: deepskyblue;
+}
