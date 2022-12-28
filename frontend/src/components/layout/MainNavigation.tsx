@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import styles from '@/styles/components/layout/MainNavigation.module.css';
-import { useAppSelector } from '@/hooks/workoutsHook';
+import { useAppSelector } from '@/hooks/storeHook';
 
 export default function MainNavigation() {
   const userState = useAppSelector((state) => state.user);

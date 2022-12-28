@@ -1,4 +1,4 @@
-import { useAppDispatch } from '@/hooks/workoutsHook';
+import { useAppDispatch } from '@/hooks/storeHook';
 import { getAllWorkouts } from '@/store/workoutsSlice';
 import styles from '@/styles/components/workout/WorkoutItem.module.css';
 import { IWorkout } from '@/types/workout-type';
