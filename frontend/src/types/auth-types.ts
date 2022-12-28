@@ -3,3 +3,7 @@ export interface IResponsePayload {
   email: string;
   idToken: string;
 }
+
+export interface INotOkResponse {
+  [message: string]: string;
+}

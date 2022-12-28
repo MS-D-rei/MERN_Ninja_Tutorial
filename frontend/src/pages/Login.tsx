@@ -6,14 +6,16 @@ import {
   setLoginState,
   setName,
 } from '@/store/userSlice';
-import { IResponsePayload } from '@/types/auth-types';
-import styles from '@/styles/pages/Login.module.css'
+import styles from '@/styles/pages/Login.module.css';
+import { useLogin } from '@/hooks/useLogin';
 
 export default function Login() {
   const [emailInput, setEmailInput] = useState('');
   const [passwordInput, setPasswordInput] = useState('');
 
   const dispatch = useAppDispatch();
+
+  const { sendLoginRequest, isLoading, error } = useLogin();
 
   const emailChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setEmailInput(event.target.value);
@@ -26,32 +28,18 @@ export default function Login() {
   const submitHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    /* create login request */
-    const loginRequestBody = {
-      email: emailInput,
-      password: passwordInput,
-    };
-
-    /* send request to backend */
-    const response = await fetch('http://localhost:4000/api/user/signup', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(loginRequestBody),
-    });
-
-    if (!response.ok) {
-      throw new Error(await response.json());
-    }
-
-    const data: IResponsePayload = await response.json();
+    /* send login request and get response.json() data */
+    /* if error => setError() */
+    const data = await sendLoginRequest(emailInput, passwordInput);
+    console.log(data);
 
     /* update user state */
-    dispatch(setName(data.name));
-    dispatch(setEmail(data.email));
-    dispatch(setLoginState(true));
-    dispatch(setIdToken(data.idToken));
+    if (data) {
+      dispatch(setName(data.name));
+      dispatch(setEmail(data.email));
+      dispatch(setLoginState(true));
+      dispatch(setIdToken(data.idToken));
+    }
   };
 
   return (
@@ -77,8 +65,9 @@ export default function Login() {
           />
         </div>
         <div className={styles.formActions}>
-          <button type="submit">Log in</button>
+          <button type="submit" disabled={isLoading}>Log in</button>
         </div>
+        {error && <div className={styles.errorMessage}>{error.message}</div>}
       </form>
     </section>
   );
