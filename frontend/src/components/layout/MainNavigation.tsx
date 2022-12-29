@@ -1,10 +1,19 @@
-import { Link } from 'react-router-dom';
+import { Link, redirect, useNavigate } from 'react-router-dom';
 import styles from '@/styles/components/layout/MainNavigation.module.css';
 import { useAppSelector } from '@/hooks/storeHook';
+import { useLogout } from '@/hooks/useLogout';
 
 export default function MainNavigation() {
   const userState = useAppSelector((state) => state.user);
   const { isLoggedIn } = userState;
+  const { logout } = useLogout();
+  const navigate = useNavigate();
+
+  const logoutHandler = () => {
+    logout();
+    navigate('/login');
+  }
+
   return (
     <header className={styles.header}>
       <div className={styles.container}>
@@ -22,6 +31,11 @@ export default function MainNavigation() {
                   <Link to="/signup">Signup</Link>
                 </li>
               </>
+            )}
+            {isLoggedIn && (
+              <li>
+                <button onClick={logoutHandler}>Logout</button>
+              </li>
             )}
           </ul>
         </nav>

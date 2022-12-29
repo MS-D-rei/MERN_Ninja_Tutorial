@@ -63,3 +63,15 @@
 .nav a:active {
   color: deepskyblue;
 }
+
+.nav button {
+  background-color: #fff;
+  border: 0;
+  font: inherit;
+  text-decoration: none;
+}
+
+.nav button:hover,
+.nav button:active {
+  color: deepskyblue;
+}
