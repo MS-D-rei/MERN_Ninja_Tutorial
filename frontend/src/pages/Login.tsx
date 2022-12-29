@@ -1,19 +1,12 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
-import { useAppDispatch } from '@/hooks/storeHook';
-import {
-  setEmail,
-  setIdToken,
-  setLoginState,
-  setName,
-} from '@/store/userSlice';
 import styles from '@/styles/pages/Login.module.css';
 import { useLogin } from '@/hooks/useLogin';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
   const [emailInput, setEmailInput] = useState('');
   const [passwordInput, setPasswordInput] = useState('');
-
-  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const { sendLoginRequest, isLoading, error } = useLogin();
 
@@ -32,14 +25,7 @@ export default function Login() {
     /* if error => setError() */
     const data = await sendLoginRequest(emailInput, passwordInput);
     console.log(data);
-
-    /* update user state */
-    if (data) {
-      dispatch(setName(data.name));
-      dispatch(setEmail(data.email));
-      dispatch(setLoginState(true));
-      dispatch(setIdToken(data.idToken));
-    }
+    console.log(error);
   };
 
   return (
@@ -65,7 +51,9 @@ export default function Login() {
           />
         </div>
         <div className={styles.formActions}>
-          <button type="submit" disabled={isLoading}>Log in</button>
+          <button type="submit" disabled={isLoading}>
+            Log in
+          </button>
         </div>
         {error && <div className={styles.errorMessage}>{error.message}</div>}
       </form>
