@@ -1,20 +1,13 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
-import { useAppDispatch } from '@/hooks/storeHook';
-import {
-  setEmail,
-  setIdToken,
-  setLoginState,
-  setName,
-} from '@/store/userSlice';
 import styles from '@/styles/pages/Signup.module.css';
 import { useSignup } from '@/hooks/useSignup';
+import { useNavigate } from 'react-router-dom';
 
 export default function Signup() {
   const [nameInput, setNameInput] = useState('');
   const [emailInput, setEmailInput] = useState('');
   const [passwordInput, setPasswordInput] = useState('');
-
-  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const { sendSignUpRequest, isLoading, error } = useSignup();
 
@@ -37,14 +30,6 @@ export default function Signup() {
     /* if error => setError() */
     const data = await sendSignUpRequest(nameInput, emailInput, passwordInput);
     console.log(data);
-
-    /* update user state */
-    if (data) {
-      dispatch(setName(data.name));
-      dispatch(setEmail(data.email));
-      dispatch(setLoginState(true));
-      dispatch(setIdToken(data.idToken));
-    }
   };
 
   return (
@@ -79,9 +64,11 @@ export default function Signup() {
           />
         </div>
         <div className={styles.formActions}>
-          <button type="submit" disabled={isLoading}>Sign up</button>
+          <button type="submit" disabled={isLoading}>
+            Sign up
+          </button>
         </div>
-        { error && <div className={styles.errorMessage}>{error.message}</div> }
+        {error && <div className={styles.errorMessage}>{error.message}</div>}
       </form>
     </section>
   );

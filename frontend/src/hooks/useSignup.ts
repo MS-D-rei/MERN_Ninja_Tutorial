@@ -1,9 +1,13 @@
 import { useState } from 'react';
 import { INotOkResponse, IResponsePayload } from '@/types/auth-types';
+import { useAppDispatch } from './storeHook';
+import { setName, setEmail, setLoginState, setIdToken } from '@/store/userSlice';
 
 export function useSignup() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<{ [key: string]: string }>();
+
+  const dispatch = useAppDispatch();
 
   const sendSignUpRequest = async (
     name: string,
@@ -37,8 +41,17 @@ export function useSignup() {
         return;
       }
 
+      /* reset error for multiple try */
+      setError(undefined);
+
       /* save the user info to local storage */
       localStorage.setItem('user', JSON.stringify(data));
+
+      /* update user state */
+      dispatch(setName(data.name));
+      dispatch(setEmail(data.email));
+      dispatch(setLoginState(true));
+      dispatch(setIdToken(data.idToken));
 
       return data as IResponsePayload;
     } catch (err) {
