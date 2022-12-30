@@ -1,6 +1,7 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import styles from '@/styles/pages/Signup.module.css';
-import { useSignup } from '@/hooks/useSignup';
+import { useAppDispatch, useAppSelector } from '@/hooks/storeHook';
+import { resetError, signup } from '@/store/userSlice';
 import { useNavigate } from 'react-router-dom';
 
 export default function Signup() {
@@ -9,7 +10,16 @@ export default function Signup() {
   const [passwordInput, setPasswordInput] = useState('');
   const navigate = useNavigate();
 
-  const { sendSignUpRequest, isLoading, error } = useSignup();
+  const dispatch = useAppDispatch();
+  const userState = useAppSelector((state) => state.user);
+  const { status, error } = userState;
+
+  const isDisable = status === 'loading' ? true : false;
+
+  /* reset error when visit from other page */
+  useEffect(() => {
+    dispatch(resetError());
+  }, [dispatch])
 
   const nameChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setNameInput(event.target.value);
@@ -27,9 +37,15 @@ export default function Signup() {
     event.preventDefault();
 
     /* send signup request and get response.json() data */
-    /* if error => setError() */
-    const data = await sendSignUpRequest(nameInput, emailInput, passwordInput);
-    console.log(data);
+    /* if error => user state will have error state */
+    dispatch(
+      signup({ name: nameInput, email: emailInput, password: passwordInput })
+    )
+      .unwrap()
+      .then((data) => {
+        navigate('/');
+      })
+      .catch((rejectedValue) => {});
   };
 
   return (
@@ -64,7 +80,7 @@ export default function Signup() {
           />
         </div>
         <div className={styles.formActions}>
-          <button type="submit" disabled={isLoading}>
+          <button type="submit" disabled={isDisable}>
             Sign up
           </button>
         </div>
