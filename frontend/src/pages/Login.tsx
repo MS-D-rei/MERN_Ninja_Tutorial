@@ -1,14 +1,23 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import styles from '@/styles/pages/Login.module.css';
-import { useLogin } from '@/hooks/useLogin';
 import { useNavigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '@/hooks/storeHook';
+import { login, resetError } from '@/store/userSlice';
 
 export default function Login() {
   const [emailInput, setEmailInput] = useState('');
   const [passwordInput, setPasswordInput] = useState('');
   const navigate = useNavigate();
 
-  const { sendLoginRequest, isLoading, error } = useLogin();
+  const dispatch = useAppDispatch();
+  const userState = useAppSelector((state) => state.user);
+  const { status, error } = userState;
+
+  useEffect(() => {
+    dispatch(resetError());
+  }, [dispatch]);
+
+  const isDisable = status === 'loading' ? true : false;
 
   const emailChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setEmailInput(event.target.value);
@@ -21,11 +30,14 @@ export default function Login() {
   const submitHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    /* send login request and get response.json() data */
-    /* if error => setError() */
-    const data = await sendLoginRequest(emailInput, passwordInput);
-    console.log(data);
-    console.log(error);
+    /* send login request and get {name, email, idToken} data or {message} data */
+    /* when get {message} data, it will be set to userState.error  */
+    dispatch(login({ email: emailInput, password: passwordInput }))
+      .unwrap()
+      .then((data) => {
+        navigate('/');
+      })
+      .catch((rejectedValue) => {});
   };
 
   return (
@@ -51,7 +63,7 @@ export default function Login() {
           />
         </div>
         <div className={styles.formActions}>
-          <button type="submit" disabled={isLoading}>
+          <button type="submit" disabled={isDisable}>
             Log in
           </button>
         </div>
