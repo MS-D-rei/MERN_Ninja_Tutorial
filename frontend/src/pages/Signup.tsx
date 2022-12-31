@@ -36,8 +36,8 @@ export default function Signup() {
   const submitHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    /* send signup request and get response.json() data */
-    /* if error => user state will have error state */
+    /* send signup request and get {name, email, idToken} data or {message} data */
+    /* when get {message} data, it will be set to userState.error  */
     dispatch(
       signup({ name: nameInput, email: emailInput, password: passwordInput })
     )
