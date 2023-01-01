@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import Layout from '@/components/layout/Layout';
 // import Home from '@/pages/Home';
 const Home = lazy(() => import('@/pages/Home'));
@@ -10,7 +10,7 @@ import { useAppSelector } from './hooks/storeHook';
 import styles from '@/App.module.css';
 
 export default function App() {
-  const idToken = useAppSelector((state) => state.user.idToken);
+  const isLoggedIn = useAppSelector((state) => state.user.isLoggedIn);
 
   return (
     <Routes>
@@ -18,7 +18,7 @@ export default function App() {
         <Route
           index
           element={
-            idToken ? (
+            isLoggedIn ? (
               <Suspense
                 fallback={
                   <div className={styles.suspense}>
@@ -29,12 +29,12 @@ export default function App() {
                 <Home />
               </Suspense>
             ) : (
-              <Login />
+              <Navigate to='/login' replace />
             )
           }
         />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={!isLoggedIn ? <Login /> : <Navigate to='/' replace />} />
+        <Route path="/signup" element={!isLoggedIn ? <Signup /> : <Navigate to='/' replace />} />
       </Route>
     </Routes>
   );
