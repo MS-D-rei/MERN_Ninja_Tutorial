@@ -46,12 +46,17 @@
 
 .nav ul {
   display: flex;
+  align-items: center;
   list-style-type: none;
 }
 
 .nav li {
   margin: 0 2rem;
   font-size: 1.3rem;
+}
+
+.nav li p {
+  font-size: 1rem;
 }
 
 .nav a {

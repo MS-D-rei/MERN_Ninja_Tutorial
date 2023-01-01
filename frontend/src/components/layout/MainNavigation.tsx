@@ -4,8 +4,7 @@ import { useAppSelector } from '@/hooks/storeHook';
 import { useLogout } from '@/hooks/useLogout';
 
 export default function MainNavigation() {
-  const userState = useAppSelector((state) => state.user);
-  const { isLoggedIn } = userState;
+  const { name, isLoggedIn } = useAppSelector((state) => state.user);
   const { logout } = useLogout();
   const navigate = useNavigate();
 
@@ -33,9 +32,14 @@ export default function MainNavigation() {
               </>
             )}
             {isLoggedIn && (
-              <li>
-                <button onClick={logoutHandler}>Logout</button>
-              </li>
+              <>
+                <li>
+                  <p>{name}</p>
+                </li>
+                <li>
+                  <button onClick={logoutHandler}>Logout</button>
+                </li>
+              </>
             )}
           </ul>
         </nav>
