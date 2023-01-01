@@ -8,9 +8,10 @@ import { getAllWorkouts } from '@/store/workoutsSlice';
 export default function Home() {
   const dispatch = useAppDispatch();
   const workouts = useAppSelector((state) => state.workouts.workouts);
+  const { idToken } = useAppSelector((state) => state.user)
 
   useEffect(() => {
-    dispatch(getAllWorkouts());
+    dispatch(getAllWorkouts(idToken));
   }, [dispatch]);
 
   return (

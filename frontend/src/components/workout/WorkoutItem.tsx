@@ -1,4 +1,4 @@
-import { useAppDispatch } from '@/hooks/storeHook';
+import { useAppDispatch, useAppSelector } from '@/hooks/storeHook';
 import { getAllWorkouts } from '@/store/workoutsSlice';
 import styles from '@/styles/components/workout/WorkoutItem.module.css';
 import { IWorkout } from '@/types/workout-type';
@@ -22,10 +22,14 @@ export default function WorkoutItem({
   createdAt,
 }: WorkoutItemProps) {
   const dispatch = useAppDispatch();
+  const { idToken } = useAppSelector((state) => state.user);
 
   const deleteWorkoutHandler = async (id: string) => {
     const response = await fetch(`http://localhost:4000/api/workouts/${id}`, {
       method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${idToken}`,
+      },
     });
     const data: IWorkout = await response.json();
     if (!response.ok) {
@@ -33,7 +37,7 @@ export default function WorkoutItem({
       return;
     }
     console.log(data);
-    dispatch(getAllWorkouts());
+    dispatch(getAllWorkouts(idToken));
   };
 
   return (

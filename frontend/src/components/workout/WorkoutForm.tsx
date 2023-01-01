@@ -1,5 +1,5 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
-import { useAppDispatch } from '@/hooks/storeHook';
+import { useAppDispatch, useAppSelector } from '@/hooks/storeHook';
 import { getAllWorkouts } from '@/store/workoutsSlice';
 import styles from '@/styles/components/workout/WorkoutForm.module.css';
 import WorkoutListError from '@/components/workout/WorkoutListError';
@@ -8,9 +8,10 @@ export default function WorkoutForm() {
   const [title, setTitle] = useState('');
   const [load, setLoad] = useState('');
   const [reps, setReps] = useState('');
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string[] | null>(null);
 
   const dispatch = useAppDispatch();
+  const idToken = useAppSelector((state) => state.user.idToken);
 
   // console.log('WorkForm is rendered');
 
@@ -30,6 +31,12 @@ export default function WorkoutForm() {
   // submit handle
   const submitHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    if (!idToken) {
+      setError(['You must be logged in']);
+      return;
+    }
+
     const newWorkout = {
       title,
       load,
@@ -40,6 +47,7 @@ export default function WorkoutForm() {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${idToken}`,
       },
       body: JSON.stringify(newWorkout),
     });
@@ -54,7 +62,7 @@ export default function WorkoutForm() {
       setTitle('');
       setLoad('');
       setReps('');
-      dispatch(getAllWorkouts());
+      dispatch(getAllWorkouts(idToken));
     }
     console.log(data);
   };
