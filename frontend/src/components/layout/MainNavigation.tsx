@@ -1,15 +1,18 @@
-import { Link, redirect, useNavigate } from 'react-router-dom';
-import styles from '@/styles/components/layout/MainNavigation.module.css';
-import { useAppSelector } from '@/hooks/storeHook';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '@/hooks/storeHook';
 import { useLogout } from '@/hooks/useLogout';
+import { setWorkouts } from '@/store/workoutsSlice';
+import styles from '@/styles/components/layout/MainNavigation.module.css';
 
 export default function MainNavigation() {
+  const dispatch = useAppDispatch();
   const { name, isLoggedIn } = useAppSelector((state) => state.user);
   const { logout } = useLogout();
   const navigate = useNavigate();
 
   const logoutHandler = () => {
     logout();
+    dispatch(setWorkouts([]));
     navigate('/login', { replace: true });
   };
 
