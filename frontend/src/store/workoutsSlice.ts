@@ -1,5 +1,10 @@
 import { IWorkout } from '@/types/workout-type';
-import { AnyAction, createSlice, PayloadAction, ThunkDispatch } from '@reduxjs/toolkit';
+import {
+  AnyAction,
+  createSlice,
+  PayloadAction,
+  ThunkDispatch,
+} from '@reduxjs/toolkit';
 import { RootState } from '@/store/store';
 
 interface WorkoutsState {
@@ -21,12 +26,14 @@ export const workoutsSlice = createSlice({
 });
 
 /* thunk function to get all workouts from DB */
-export const getAllWorkouts = () => {
-  return async (
-    dispatch: ThunkDispatch<RootState, unknown, AnyAction>
-  ) => {
+export const getAllWorkouts = (userIdToken: string) => {
+  return async (dispatch: ThunkDispatch<RootState, unknown, AnyAction>) => {
     try {
-      const response = await fetch('http://localhost:4000/api/workouts')
+      const response = await fetch('http://localhost:4000/api/workouts', {
+        headers: {
+          Authorization: `Bearer ${userIdToken}`,
+        },
+      });
       if (!response.ok) {
         throw new Error('Could not fetch workouts data');
       }
@@ -39,8 +46,8 @@ export const getAllWorkouts = () => {
         console.log(`Unexpected Error: ${err}`);
       }
     }
-  }
-}
+  };
+};
 
 export const { setWorkouts } = workoutsSlice.actions;
 export default workoutsSlice.reducer;
