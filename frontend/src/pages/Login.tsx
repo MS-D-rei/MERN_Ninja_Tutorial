@@ -35,7 +35,7 @@ export default function Login() {
     dispatch(login({ email: emailInput, password: passwordInput }))
       .unwrap()
       .then((data) => {
-        navigate('/');
+        navigate('/', { replace: true });
       })
       .catch((rejectedValue) => {});
   };

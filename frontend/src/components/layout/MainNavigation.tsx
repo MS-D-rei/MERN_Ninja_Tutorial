@@ -11,8 +11,8 @@ export default function MainNavigation() {
 
   const logoutHandler = () => {
     logout();
-    navigate('/login');
-  }
+    navigate('/login', { replace: true });
+  };
 
   return (
     <header className={styles.header}>

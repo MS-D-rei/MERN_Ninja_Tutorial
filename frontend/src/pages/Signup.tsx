@@ -19,7 +19,7 @@ export default function Signup() {
   /* reset error when visit from other page */
   useEffect(() => {
     dispatch(resetError());
-  }, [dispatch])
+  }, [dispatch]);
 
   const nameChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setNameInput(event.target.value);
@@ -43,7 +43,7 @@ export default function Signup() {
     )
       .unwrap()
       .then((data) => {
-        navigate('/');
+        navigate('/', { replace: true });
       })
       .catch((rejectedValue) => {});
   };
