@@ -4,7 +4,9 @@ const mongoose = require("mongoose");
 // get all workouts
 const workout_index = async (req, res) => {
   try {
-    const allWorkouts = await Workout.find().sort({ createdAt: -1 });
+    // req.user comes from requireAuth.js
+    const user_id = req.user._id;
+    const allWorkouts = await Workout.find({ user_id }).sort({ createdAt: -1 });
     res.json(allWorkouts);
   } catch (err) {
     if (err instanceof Error) {
@@ -50,7 +52,9 @@ const workout_create_post = async (req, res) => {
   }
 
   try {
-    const workout = await Workout.create({ title, reps, load });
+    // req.user comes from requireAuth.js
+    const user_id = req.user._id;
+    const workout = await Workout.create({ title, reps, load, user_id });
     res.status(200).json(workout);
   } catch (err) {
     if (err instanceof Error) {
