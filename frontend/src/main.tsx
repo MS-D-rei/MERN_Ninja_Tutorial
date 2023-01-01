@@ -1,15 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { RouterProvider } from 'react-router-dom';
+import { BrowserRouter, RouterProvider } from 'react-router-dom';
 import { router } from '@/router/router';
 import './index.css';
 import { Provider } from 'react-redux';
 import { store } from '@/store/store';
+import App from './App';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <Provider store={store}>
-      <RouterProvider router={router} />
+      {/* <RouterProvider router={router}/> */}
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </Provider>
   </React.StrictMode>
 );
